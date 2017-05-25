@@ -68,6 +68,11 @@ new DubAPI({ username: settings.USERNAME, password: settings.PASSWORD }, functio
         bot.reconnect();
     });
 
+    bot.robotChat = function(msg, cb) {
+      msg = "`" + msg + "`";
+      bot.sendChat.call(bot, msg, cb);
+    };
+
     connect();
 
     //pass the bot and db to the events handler

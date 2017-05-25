@@ -34,7 +34,7 @@ module.exports = function(bot, db, data) {
 
       } else {
          bot.log('error','BOT', "Could not pause queue");
-         bot.sendChat(`Error leaving the queue, probably an API issue. Try again or manually remove me.`);
+         bot.sendChat("Error leaving the queue, probably an API issue. Try again or manually remove me.");
        }
     });
     return;

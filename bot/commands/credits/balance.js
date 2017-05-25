@@ -27,7 +27,7 @@ function lookUpBalance(bot, db, whoAsked, whoFor, which){
         sayTheirBalance(bot, whoAsked,  user);
       }
     } else {
-      bot.sendChat(`Strange, data for that was not found!`);
+      bot.sendChat("Strange, data for that was not found!");
     }
     
   });
