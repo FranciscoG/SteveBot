@@ -9,7 +9,9 @@
     "live": "ENV=prod nodemon index.js",
     "test": "ENV=test mocha -c -t 10000 --reporter=spec tests",
     "lint": "./node_modules/eslint/bin/eslint.js .",
-    "secrets": "tar cvf secrets.tar private && travis encrypt-file secrets.tar && rm secrets.tar"
+    "secrets": "tar cvf secrets.tar private && travis encrypt-file secrets.tar && rm secrets.tar",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -24,7 +26,8 @@
     "node-schedule": "^1.3.0",
     "request": "^2.87.0",
     "superagent": "^3.5.2",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "snyk": "^1.161.1"
   },
   "engines": {
     "node": "4.0.0"
@@ -47,5 +50,6 @@
     "marked": "^0.3.6",
     "mocha": "^5.1.1",
     "supertest": "^2.0.0"
-  }
+  },
+  "snyk": true
 }
