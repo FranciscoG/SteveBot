@@ -1,5 +1,5 @@
-var request = require('request');
-var _get = require('lodash/get');
+const request = require('request');
+const _get = require('lodash/get');
 
 /**
  * Mini programming language for triggers

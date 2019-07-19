@@ -1,33 +1,27 @@
 'use strict';
-const _private = require(process.cwd() + '/private/get'); 
-const settings = _private.settings;
+const settings = require(process.cwd() + '/private/get').settings; 
 var historyStore = require(process.cwd()+ '/bot/store/history.js');
 const nmm = require(process.cwd()+ '/bot/store/nmm.js');
 const ff = require(process.cwd()+ '/bot/store/ff.js');
-var _ = require('lodash');
+var _get = require('lodash/get');
 
-settings.APPROVED_USERS.push(settings.OWNER);
-var approved = settings.APPROVED_USERS.map(function(u){return u.toLowerCase(); });
-function checkCreds(user){
-  return approved.indexOf(user.toLowerCase()) >= 0;
-}
+const roleChecker = require(process.cwd()+ '/bot/utilities/roleChecker.js');
 
 module.exports = function(bot, db, data) {
-  if (typeof bot !== 'object' || typeof data !== 'object') {
+  if (typeof bot !== 'object' || typeof data !== 'object' || !data.user) {
     return;
   }
 
-  var userName = _.get(data, 'user.username');
-  if (!userName) { return; }
+  var isBotAdmin = roleChecker(bot, data.user, 'bot_admin');
 
-  // check if person sending chat is the owner
-  if (!checkCreds(userName)) {
-    return bot.sendChat('Sorry I only take admin commands from my master');
+  // check if person sending chat is an approved bot user/admin
+  if (!isBotAdmin) {
+    return bot.sendChat('Sorry I only take admin commands from my masters');
   }
 
   // now we can assume all chats are from owner
   
-  var command = _.get(data, 'params[0]');
+  var command = _get(data, 'params[0]');
   // if messages was just '!admin' without a any arguments
   if (!command) {
     bot.sendChat('What would you like me to do master?');
@@ -79,11 +73,3 @@ module.exports = function(bot, db, data) {
   }
 
 };
-
-/******
-
-Ideas:
-- restore - restore firebase from latest backup
-
-
-*******/

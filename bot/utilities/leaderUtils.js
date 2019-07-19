@@ -1,6 +1,7 @@
 'use strict';
 const moment = require('moment');
 const repo = require(process.cwd()+'/repo');
+const capitalize = require(process.cwd() + "/bot/utilities/common").capitalize;
 
 function getTop3(bot, prop) {
   var arr = [];
@@ -155,8 +156,7 @@ function allTimeLeaders(bot) {
 const alphaRegex = new RegExp("[^a-z]+", "ig");
 function formatMonth(str) {
   str = str.replace(alphaRegex, ""); // sanitize
-  const first = str.charAt(0).toUpperCase();
-  return (first +  str.toLowerCase().substr(1)).replace(/([a-z]{3}).+/i, '$1');
+  return capitalize(str).replace(/([a-z]{3}).+/i, '$1');
 }
 
 function getLeadersByMonthYear(bot, month, year) {

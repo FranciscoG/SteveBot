@@ -1,8 +1,7 @@
 'use strict';
-
-function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-}
+const settings = require(process.cwd() + '/private/get').settings; 
+settings.APPROVED_USERS.push(settings.OWNER);
+const capitalize = require(process.cwd() + "/bot/utilities/common").capitalize;
 
 /*********************************************************************
   roleChecker,  kind of like hasPermission
@@ -31,6 +30,15 @@ module.exports = function(bot, user, minRole) {
   if (!bot || !user || !minRole) {
     bot.log('error', 'BOT', 'Missing arguments in roleChecker');
     return false; 
+  }
+
+  // special cases for bot related access
+  if (minRole === 'bot_admin') {
+    return settings.APPROVED_USERS.indexOf(user.id) >= 0;
+  }
+
+  if (minRole === 'bot_owner') {
+    return user.id === settings.OWNER;
   }
 
   // get the index of the mininum role from our roleRanks

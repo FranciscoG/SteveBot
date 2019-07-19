@@ -11,8 +11,8 @@ create a settings.js file in this directory with the following info
 
 ```js
 module.exports = {
-  'OWNER' : 'your dubtrack user name',
-  'APPROVED_USERS' : [], // add trustworthy Dubtrack users here
+  'OWNER' : 'your dubtrack user ID',
+  'APPROVED_USERS' : [], // add trustworthy Dubtrack user IDs here
   'USERNAME': 'login',
   'PASSWORD': 'password',
   'ROOMNAME': 'dubtrack room name',
