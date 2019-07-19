@@ -20,6 +20,20 @@ const _get = require('lodash/get');
   !wiki black+cats
  */ 
 
+const KEYWORDS = {
+  'GET' : 'action', 
+  'GETJ' : 'action', // to explicitly set the req to accept json
+  'FROM' : 'setter', // the value can have dynamic replacements
+  'FORMAT' : 'action'  // the value can have dynamic replacements
+};
+
+const CONSTANTS = {
+  '{M}': () => new Date().getMonth() + 1,
+  '{D}': () => new Date().getDate(),
+  'PROP' : '',
+  'FLOW' : ''
+};
+
  function parseTrigger(trig) {
    // remove open/close brackets
   const nodes =  trig.slice(1, -1).trim().split(" ");
